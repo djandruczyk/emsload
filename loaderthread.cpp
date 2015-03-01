@@ -81,7 +81,7 @@ void LoaderThread::run()
 					}
 					else
 					{
-						output.write(record.toAscii());
+                        output.write(record.toLatin1());
 						output.flush();
 					}
 				}

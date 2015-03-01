@@ -19,7 +19,7 @@
  ************************************************************************************/
 
 #include "mainwindow.h"
-#include <qserialportinfo.h>
+#include <QtSerialPort/QSerialPortInfo>
 #include <QTimer>
 #include <QDebug>
 #include <QFileDialog>

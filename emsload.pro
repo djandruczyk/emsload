@@ -4,14 +4,12 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui serialport widgets
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-CONFIG += debug
 TARGET = emsload
 TEMPLATE = app
 
-include(serialport/apmserial.pri)
+#include(serialport/apmserial.pri)
 
 SOURCES += main.cpp\
         mainwindow.cpp \

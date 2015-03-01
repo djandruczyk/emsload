@@ -2,7 +2,7 @@
 #define SERIALMONITOR_H
 
 #include <QObject>
-#include "qserialport.h"
+#include <QtSerialPort/QSerialPort>
 
 class SerialMonitor : public QObject
 {
