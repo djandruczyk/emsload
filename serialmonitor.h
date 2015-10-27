@@ -2,8 +2,7 @@
 #define SERIALMONITOR_H
 
 #include <QObject>
-#include <QtSerialPort/QSerialPort>
-
+#include "serial/serial/serial.h"
 class SerialMonitor : public QObject
 {
 	Q_OBJECT
@@ -20,7 +19,8 @@ public:
 	void sendReset();
 private:
 	int readBytes(QByteArray *buf,int len,int timeout=1000);
-	QSerialPort *m_port;
+	//QSerialPort *m_port;
+	serial::Serial *m_port;
 	QByteArray m_privBuffer;
 signals:
 	

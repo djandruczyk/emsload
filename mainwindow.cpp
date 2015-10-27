@@ -35,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 	connect(ui.loadFirmwarePushButton,SIGNAL(clicked()),this,SLOT(loadButtonClicked()));
 	connect(ui.selectFirmwarePushButton,SIGNAL(clicked()),this,SLOT(selectFileButtonClicked()));
 	connect(ui.selectSavePushButton,SIGNAL(clicked()),this,SLOT(selectSaveButtonClicked()));
+
 }
 
 MainWindow::~MainWindow()

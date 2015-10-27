@@ -110,7 +110,7 @@ void LoaderThread::run()
 		{
 			//Timed out
 			serialMonitor->closePort();
-			qDebug() << "Unable to open port";
+			//qDebug() << "Unable to open port";
 			emit error("Unable to verify SM mode. Ensure you have the correct device selected, and it is in SM mode.");
 			delete serialMonitor;
 			return;
