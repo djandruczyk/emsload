@@ -80,6 +80,9 @@ void MainWindow::loadButtonClicked()
 	connect(m_loaderThread,SIGNAL(done(quint64)),this,SLOT(loaderDone(quint64)));
 	connect(m_loaderThread,SIGNAL(error(QString)),this,SLOT(loaderError(QString)));
 	m_loaderThread->startLoad(m_loadedS19,ui.portNameComboBox->itemData(ui.portNameComboBox->currentIndex()).toString());
+	ui.loadFirmwarePushButton->setEnabled(false);
+	ui.selectFirmwarePushButton->setEnabled(false);
+	ui.selectSavePushButton->setEnabled(false);
 }
 void MainWindow::loadFileDone()
 {
@@ -121,6 +124,9 @@ void MainWindow::loaderDone(quint64 msecs)
 	m_loaderThread->deleteLater();
 	m_loaderThread = 0;
 	QMessageBox::information(0,"Congratulations!","Flashing is complete! Please remove SM jumper and reset the device");
+	ui.loadFirmwarePushButton->setEnabled(true);
+	ui.selectFirmwarePushButton->setEnabled(true);
+	ui.selectSavePushButton->setEnabled(true);
 }
 void MainWindow::selectSaveButtonClicked()
 {
@@ -132,9 +138,16 @@ void MainWindow::selectSaveButtonClicked()
 	m_loaderThread = new LoaderThread();
 	connect(m_loaderThread,SIGNAL(progress(quint64,quint64)),this,SLOT(loaderProgress(quint64,quint64)));
 	connect(m_loaderThread,SIGNAL(done()),this,SLOT(loaderDone()));
+	connect(m_loaderThread,SIGNAL(error(QString)),this,SLOT(loaderError(QString)));
 	m_loaderThread->startRip(filename,ui.portNameComboBox->itemData(ui.portNameComboBox->currentIndex()).toString());
+	ui.loadFirmwarePushButton->setEnabled(false);
+	ui.selectFirmwarePushButton->setEnabled(false);
+	ui.selectSavePushButton->setEnabled(false);
 }
 void MainWindow::loaderError(QString error)
 {
 	QMessageBox::information(0,"Error",error);
+	ui.loadFirmwarePushButton->setEnabled(true);
+	ui.selectFirmwarePushButton->setEnabled(true);
+	ui.selectSavePushButton->setEnabled(true);
 }
