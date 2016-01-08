@@ -123,7 +123,7 @@ void LoaderThread::run()
 		for (int i=0;i<m_s19File->getCompactRecordCount();i++)
 		{
 
-			emit progress(i,m_s19File->getCompactRecordCount());
+			emit progress(i*100,m_s19File->getCompactRecordCount()*100);
 			unsigned int address = m_s19File->getCompactRecord(i).first;
 			unsigned char newpage = (address >> 16) & 0xFF;
 
@@ -135,8 +135,10 @@ void LoaderThread::run()
 				serialMonitor->eraseBlock();
 			}
 
+			int size = m_s19File->getCompactRecord(i).second.size();
 			for (int j=0;j<m_s19File->getCompactRecord(i).second.size();j+=252)
 			{
+				emit progress((i*100) + (((double)j/(double)size) * 100.0),m_s19File->getCompactRecordCount()*100);
 				if (totalerror >= 100)
 				{
 					serialMonitor->closePort();
