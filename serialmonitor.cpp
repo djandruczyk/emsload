@@ -341,3 +341,27 @@ void SerialMonitor::sendReset()
 	m_port->write((const uint8_t*)QByteArray().append(0xB4).data(),1); //reset
 
 }
+
+void SerialMonitor::jumpToSM()
+{
+	uint8_t buff[1024];
+	const uint8_t jump_to_sm[] = "\xAA\x00\x03\x0A\x0D\xCC";
+	qDebug() << "Attempting to jump to serial monitor";
+	m_port->write(jump_to_sm,6); //jump_to_sm
+	QThread::currentThread()->msleep(200);
+	m_port->read(buff,1024);
+}
+
+bool SerialMonitor::isStreaming()
+{
+	uint8_t buff[1024];
+	uint16_t res = 0;
+	res = m_port->read(buff,1024);
+	if (res > 0)
+	{
+		qDebug() << "Streaming detected...";
+		return true;
+	}
+	else
+		return false;
+}

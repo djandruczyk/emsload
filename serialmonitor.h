@@ -17,6 +17,8 @@ public:
 	bool eraseBlock();
 	void closePort();
 	void sendReset();
+	void jumpToSM();
+	bool isStreaming();
 private:
 	int readBytes(QByteArray *buf,int len,int timeout=1000);
 	//QSerialPort *m_port;
