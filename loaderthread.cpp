@@ -44,11 +44,11 @@ void LoaderThread::run()
 		serialMonitor->openPort(m_portName);
 		if (!serialMonitor->verifySM())
 		{
-				//Timed out
-				serialMonitor->closePort();
-				emit error("Unable to verify SM mode");
-				delete serialMonitor;
-				return;
+			//Timed out
+			serialMonitor->closePort();
+			emit error("Unable to verify SM mode");
+			delete serialMonitor;
+			return;
 		}
 
 		//We're in SM mode! Let's do stuff.
@@ -108,7 +108,7 @@ void LoaderThread::run()
 
 		if (!serialMonitor->isStreaming()) /* See if the ecu is NOT in SM mode */
 		{
-			serialMonitor->jumpToSM();		/* Tell it to get with the program */
+			serialMonitor->jumpToSM(); /* Tell it to get with the program */
 		} else {
 			if (!serialMonitor->verifySM()) /* we didn't detect streaming, 
 											 *  but it may NOT be in SM so check it */
